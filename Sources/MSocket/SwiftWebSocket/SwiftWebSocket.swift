@@ -11,7 +11,7 @@ final public class SwiftWebSocket {
   
   public init(urlRequest: URLRequest? = nil,
               @RequestBuilder builder: () -> RequestBuilderProtocol) {
-    self.urlRequest = urlRequest ?? URLRequest(url: URL(string: "https://")!)
+    self.urlRequest = urlRequest ?? URLRequest(url: URL(string: "wss://")!)
     self.parameter = builder()
     parameter.build(request: &self.urlRequest)
     socket = WebSocket(request: self.urlRequest)
@@ -26,13 +26,13 @@ final public class SwiftWebSocket {
     }
   }
   
-  func write(string: String?, completion: (() -> ())? = nil) {
+  public func write(string: String?, completion: (() -> ())? = nil) {
     if let string = string {
       socket?.write(string: string, completion: completion)
     }
   }
   
-  func write(data: Data?, completion: (() -> ())? = nil) {
+  public func write(data: Data?, completion: (() -> ())? = nil) {
     if let data = data {
       socket?.write(data: data, completion: completion)
     }
