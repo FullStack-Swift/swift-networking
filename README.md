@@ -13,6 +13,8 @@ let socket = MSocket {
   RUrl(urlString: urlString)
   /// somthing else
 }
+
+socket.write(string: "something")
 ```
 ### Response Handling
 
