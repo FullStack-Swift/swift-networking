@@ -63,4 +63,4 @@ dependencies: [
 
 # Example
 
-https://github.com/FullStack-Swift/TodoFullStackSwift
+https://github.com/FullStack-Swift/TodoList
