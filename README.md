@@ -10,8 +10,8 @@ let request = MRequest {
 }
 
 let socket = MSocket {
-  RMethod(.get)
   RUrl(urlString: urlString)
+  /// somthing else
 }
 ```
 ### Response Handling
