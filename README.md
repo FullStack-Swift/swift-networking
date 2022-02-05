@@ -8,6 +8,11 @@ let request = MRequest {
   RUrl(urlString: urlString)
   /// somthing else
 }
+
+let socket = MSocket {
+  RMethod(.get)
+  RUrl(urlString: urlString)
+}
 ```
 ### Response Handling
 
@@ -16,16 +21,27 @@ let request = MRequest {
 request.sink { response in
   debugPrint(response)
 }
+
+socket.sink { response in
+  debugPrint(response)
 ```
 - ReactiveSwift
 ```swift
 request.producer.startWithValues { response in
   debugPrint(response)
 }
+
+socket.producer.startWithValues { response in
+  debugPrint(response)
+}
 ```
 - RxSwift
 ```swift
 request.subscribe { response in
+  debugPrint(response)
+}
+
+socket.subscribe { response in
   debugPrint(response)
 }
 ```
