@@ -6,13 +6,38 @@ The [Swift Package Manager](https://swift.org/package-manager/) is a tool for au
 
 Once you have your Swift package set up, adding Networking as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
 
+### Making Requests
 ```swift
-        let request = MRequest {
-          RMethod(.get)
-          RUrl(urlString: environment.urlString)
-        }
+let urlString = "https://httpbin.org/get"
+let request = MRequest {
+  RMethod(.get)
+  RUrl(urlString: urlString)
+  /// somthing else
+}
 ```
+### Response Handling
 
+- Combine
+```swift
+request.sink { response in
+  debugPrint(response)
+}
+```
+- ReactiveSwift
+```swift
+request.producer.startWithValues { response in
+  debugPrint(response)
+}
+```
+- RxSwift
+```swift
+request.subscribe { response in
+  debugPrint(response)
+}
+```
+# Installation
+
+## Swift Package Manager
 ```swift
 dependencies: [
     .package(url: "https://github.com/FullStack-Swift/Networking", .upToNextMajor(from: "1.0.0"))
