@@ -11,7 +11,7 @@ internal struct MergeRequestBuilder: RequestBuilderProtocol {
       return
     }
     var items: [RequestBuilderProtocol] = []
-    //url
+    /// url
     for item in children {
       if item is RUrl {
         items.append(item)
@@ -22,19 +22,19 @@ internal struct MergeRequestBuilder: RequestBuilderProtocol {
         items.append(item)
       }
     }
-    // other
+    /// other
     for item in children {
-      if !(item is RUrl || item is REncoding) {
+      if !(item is RUrl || item is REncoding || item is RPath) {
         items.append(item)
       }
     }
-    // encoding
+    /// encoding
     for item in children {
       if item is REncoding {
         items.append(item)
       }
     }
-    //build
+    /// build
     items.forEach {
       $0.build(request: &request)
     }

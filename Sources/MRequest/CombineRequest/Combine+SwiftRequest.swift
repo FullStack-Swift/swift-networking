@@ -36,10 +36,6 @@ extension SwiftRequest: Publisher {
 @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
 extension SwiftRequest {
   public func publisher() -> AnyPublisher<DataResponsePublisher<Data>.Output, DataResponsePublisher<Data>.Failure> {
-    guard let configuration = self.urlSessionConfiguration else {
-      return AF.request(urlRequest).publisher()
-    }
-    let session = Session(configuration: configuration)
-    return session.request(urlRequest).publisher()
+    dataRequest.publisher()
   }
 }

@@ -29,5 +29,3 @@ public enum RequestBuilder {
     return component
   }
 }
-
-

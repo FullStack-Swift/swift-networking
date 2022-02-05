@@ -13,10 +13,6 @@ extension SwiftRequest: SignalProducerProtocol, SignalProducerConvertible {
   // MARK: - publisher
 extension SwiftRequest {
   public func publisher() -> SignalProducer<AFDataResponse<Data?>, Never> {
-    guard let configuration = self.urlSessionConfiguration else {
-      return AF.request(urlRequest).reactive.response()
-    }
-    let session = Session(configuration: configuration)
-    return session.request(urlRequest).reactive.response()
+    dataRequest.reactive.response()
   }
 }
