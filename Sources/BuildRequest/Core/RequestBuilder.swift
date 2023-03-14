@@ -26,6 +26,6 @@ public enum RequestBuilder {
     guard let component = component else {
       return MergeRequestBuilder()
     }
-    return component
+    return MergeRequestBuilder(children: [component])
   }
 }

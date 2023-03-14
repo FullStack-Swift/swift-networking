@@ -1,0 +1,106 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Alamofire",
+        "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
+        "state": {
+          "branch": null,
+          "revision": "78424be314842833c04bc3bef5b72e85fff99204",
+          "version": "5.6.4"
+        }
+      },
+      {
+        "package": "combine-schedulers",
+        "repositoryURL": "https://github.com/pointfreeco/combine-schedulers",
+        "state": {
+          "branch": null,
+          "revision": "882ac01eb7ef9e36d4467eb4b1151e74fcef85ab",
+          "version": "0.9.1"
+        }
+      },
+      {
+        "package": "ReactiveSwift",
+        "repositoryURL": "https://github.com/ReactiveCocoa/ReactiveSwift.git",
+        "state": {
+          "branch": null,
+          "revision": "40c465af19b993344e84355c00669ba2022ca3cd",
+          "version": "7.1.1"
+        }
+      },
+      {
+        "package": "RxSwift",
+        "repositoryURL": "https://github.com/ReactiveX/RxSwift.git",
+        "state": {
+          "branch": null,
+          "revision": "b4307ba0b6425c0ba4178e138799946c3da594f8",
+          "version": "6.5.0"
+        }
+      },
+      {
+        "package": "SocketIO",
+        "repositoryURL": "https://github.com/socketio/socket.io-client-swift",
+        "state": {
+          "branch": null,
+          "revision": "af5ce97b755d964235348d96f6db5cbdcbe334a5",
+          "version": "16.0.1"
+        }
+      },
+      {
+        "package": "Starscream",
+        "repositoryURL": "https://github.com/daltoniam/Starscream.git",
+        "state": {
+          "branch": null,
+          "revision": "df8d82047f6654d8e4b655d1b1525c64e1059d21",
+          "version": "4.0.4"
+        }
+      },
+      {
+        "package": "swift-clocks",
+        "repositoryURL": "https://github.com/pointfreeco/swift-clocks",
+        "state": {
+          "branch": null,
+          "revision": "20b25ca0dd88ebfb9111ec937814ddc5a8880172",
+          "version": "0.2.0"
+        }
+      },
+      {
+        "package": "swift-dependencies",
+        "repositoryURL": "https://github.com/pointfreeco/swift-dependencies.git",
+        "state": {
+          "branch": null,
+          "revision": "6bb1034e8a1bfbf46dfb766b6c09b7b17e1cba10",
+          "version": "0.2.0"
+        }
+      },
+      {
+        "package": "swift-extension",
+        "repositoryURL": "https://github.com/FullStack-Swift/swift-extension",
+        "state": {
+          "branch": "main",
+          "revision": "f7ad4ca3f05ab0474204b9466f9709c1634e6775",
+          "version": null
+        }
+      },
+      {
+        "package": "Json",
+        "repositoryURL": "https://github.com/FullStack-Swift/swift-json",
+        "state": {
+          "branch": "main",
+          "revision": "b046fa097e0856d4e1cc90fddd634673cd530c7d",
+          "version": null
+        }
+      },
+      {
+        "package": "xctest-dynamic-overlay",
+        "repositoryURL": "https://github.com/pointfreeco/xctest-dynamic-overlay",
+        "state": {
+          "branch": null,
+          "revision": "ab8c9f45843694dd16be4297e6d44c0634fd9913",
+          "version": "0.8.4"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

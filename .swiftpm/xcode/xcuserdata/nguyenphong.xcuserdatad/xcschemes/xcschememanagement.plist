@@ -17,17 +17,22 @@
 		<key>CombineRequest.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>0</integer>
 		</dict>
-		<key>CombineWebSocket.xcscheme_^#shared#^_</key>
+		<key>CombineSocketIO.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
+		<key>CombineWebSocket.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 		<key>Networking-Package.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 		<key>ReactiveSwift (Playground) 1.xcscheme</key>
 		<dict>
@@ -111,14 +116,14 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>10</integer>
+			<integer>13</integer>
 		</dict>
 		<key>ReactiveSwift-UIExamples (Playground) 1.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>12</integer>
+			<integer>17</integer>
 		</dict>
 		<key>ReactiveSwift-UIExamples (Playground) 10.xcscheme</key>
 		<dict>
@@ -139,7 +144,7 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>13</integer>
+			<integer>18</integer>
 		</dict>
 		<key>ReactiveSwift-UIExamples (Playground) 3.xcscheme</key>
 		<dict>
@@ -195,24 +200,29 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>11</integer>
+			<integer>16</integer>
 		</dict>
 		<key>ReactiveSwiftRequest.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>4</integer>
+		</dict>
+		<key>ReactiveSwiftSocketIO.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 		<key>ReactiveSwiftWebSocket.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>6</integer>
 		</dict>
 		<key>Rx (Playground) 1.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>8</integer>
+			<integer>11</integer>
 		</dict>
 		<key>Rx (Playground) 10.xcscheme</key>
 		<dict>
@@ -233,7 +243,7 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>9</integer>
+			<integer>12</integer>
 		</dict>
 		<key>Rx (Playground) 3.xcscheme</key>
 		<dict>
@@ -289,17 +299,22 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>7</integer>
+			<integer>10</integer>
 		</dict>
 		<key>RxSwiftRequest.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>5</integer>
+			<integer>7</integer>
+		</dict>
+		<key>RxSwiftSocketIO.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
 		</dict>
 		<key>RxSwiftWebSocket.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>6</integer>
+			<integer>9</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -324,12 +339,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>CombineSocketIO</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>CombineWebSocket</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>ReactiveSwiftRequest</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>ReactiveSwiftSocketIO</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -344,12 +369,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>RxSwiftSocketIO</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>RxSwiftWebSocket</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>SwiftRequest</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>SwiftSocketIO</key>
 		<dict>
 			<key>primary</key>
 			<true/>

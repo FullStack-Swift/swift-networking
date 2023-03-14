@@ -1,7 +1,7 @@
 import Foundation
 
 public struct RPath: RequestBuilderProtocol {
-  let path: String?
+  private let path: String?
   
   public init(path: String?) {
     self.path = path

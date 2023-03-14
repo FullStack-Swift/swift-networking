@@ -1,5 +1,5 @@
-  // swift-tools-version:5.5
-  // The swift-tools-version declares the minimum version of Swift required to build this package.
+// swift-tools-version:5.5
+// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
@@ -15,75 +15,161 @@ let package = Package(
     // request
     .library(
       name: "CombineRequest",
-      targets: ["SwiftRequest", "CombineRequest"]),
+      targets: ["MRequest", "MCombineRequest"]),
     .library(
       name: "RxSwiftRequest",
-      targets: ["SwiftRequest", "RxSwiftRequest"]),
+      targets: ["MRequest", "MRxSwiftRequest"]),
     .library(
       name: "ReactiveSwiftRequest",
-      targets: ["SwiftRequest", "ReactiveSwiftRequest"]),
+      targets: ["MRequest", "MReactiveSwiftRequest"]),
     // websocket
     .library(
       name: "CombineWebSocket",
-      targets: ["SwiftWebSocket","CombineWebSocket"]),
+      targets: ["MWebSocket","MCombineWebSocket"]),
     .library(
       name: "RxSwiftWebSocket",
-      targets: ["SwiftWebSocket","RxSwiftWebSocket"]),
+      targets: ["MWebSocket","MRxSwiftWebSocket"]),
     .library(
       name: "ReactiveSwiftWebSocket",
-      targets: ["SwiftWebSocket","ReactiveSwiftWebSocket"]),
+      targets: ["MWebSocket","MReactiveSwiftWebSocket"]),
+    // socketio
+    .library(
+      name: "CombineSocketIO",
+      targets: ["MSocketIO", "MCombineSocketIO"]),
+    .library(
+      name: "RxSwiftSocketIO",
+      targets: ["MSocketIO", "MRxSwiftSocketIO"]),
+    .library(
+      name: "ReactiveSwiftSocketIO",
+      targets: ["MSocketIO", "MReactiveSwiftSocketIO"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/Alamofire/Alamofire.git", from: "5.5.0"),
+    .package(url: "https://github.com/Alamofire/Alamofire.git", from: "5.6.4"),
     .package(url: "https://github.com/daltoniam/Starscream.git", from: "4.0.4"),
     .package(url: "https://github.com/ReactiveX/RxSwift.git", from: "6.5.0"),
     .package(url: "https://github.com/ReactiveCocoa/ReactiveSwift.git", from: "7.0.0"),
+    .package(name: "SocketIO", url: "https://github.com/socketio/socket.io-client-swift",from: "16.0.1"),
   ],
   targets: [
-    //build request
-    .target(name: "BuildRequest", dependencies: ["Alamofire"]),
+    /**
+     Target BuildRequest
+     */
+    .target(
+      name: "BuildRequest",
+      dependencies: ["Alamofire"]
+    ),
     //request
+    /**
+     Target Request
+     */
+    
+      .target(
+        name: "MRequest",
+        dependencies: ["BuildRequest"],
+        path: "Sources/MRequest/MRequest"
+      ),
     .target(
-      name: "SwiftRequest",
-      dependencies: ["BuildRequest"],
-      path: "Sources/MRequest/SwiftRequest"
+      name: "MCombineRequest",
+      dependencies: ["MRequest"],
+      path: "Sources/MRequest/MRequestCombine"
     ),
-    .target(name: "CombineRequest",
-            dependencies: ["SwiftRequest"],
-            path: "Sources/MRequest/CombineRequest"
-           ),
-    .target(name: "RxSwiftRequest",
-            dependencies: ["SwiftRequest", "RxSwift"],
-            path: "Sources/MRequest/RxSwiftRequest"
-           ),
-    .target(name: "ReactiveSwiftRequest",
-            dependencies: ["SwiftRequest", "ReactiveSwift"],
-            path: "Sources/MRequest/ReactiveSwiftRequest"
-           ),
-    .testTarget(
-      name: "AnyRequestTests",
-      dependencies: ["SwiftRequest", "CombineRequest", "RxSwiftRequest", "ReactiveSwiftRequest"]
-    ),
-    // websocket
     .target(
-      name: "SwiftWebSocket",
+      name: "MRxSwiftRequest",
+      dependencies: ["MRequest", "RxSwift"],
+      path: "Sources/MRequest/MRequestRxSwift"
+    ),
+    .target(
+      name: "MReactiveSwiftRequest",
+      dependencies: ["MRequest", "ReactiveSwift"],
+      path: "Sources/MRequest/MRequestReactiveSwift"
+    ),
+    /**
+     Target WebSocket
+     */
+    .target(
+      name: "MWebSocket",
       dependencies: ["Starscream", "BuildRequest"],
-      path: "Sources/MSocket/SwiftWebSocket"
+      path: "Sources/MWebSocket/MWebSocket"
     ),
     .target(
-      name: "CombineWebSocket",
-      dependencies: ["SwiftWebSocket"],
-      path: "Sources/MSocket/CombineWebSocket"
+      name: "MCombineWebSocket",
+      dependencies: ["MWebSocket"],
+      path: "Sources/MWebSocket/MWebSocketCombine"
     ),
     .target(
-      name: "RxSwiftWebSocket",
-      dependencies: ["SwiftWebSocket", "RxSwift"],
-      path: "Sources/MSocket/RxSwiftWebSocket"
+      name: "MRxSwiftWebSocket",
+      dependencies: ["MWebSocket", "RxSwift"],
+      path: "Sources/MWebSocket/MWebSocketRxSwift"
     ),
     .target(
-      name: "ReactiveSwiftWebSocket",
-      dependencies: ["SwiftWebSocket", "ReactiveSwift"],
-      path: "Sources/MSocket/ReactiveSwiftWebSocket"
+      name: "MReactiveSwiftWebSocket",
+      dependencies: ["MWebSocket", "ReactiveSwift"],
+      path: "Sources/MWebSocket/MWebSocketReactiveSwift"
     ),
+    /**
+     Target SocketIO
+     */
+    .target(
+      name: "MSocketIO",
+      dependencies: ["SocketIO", "BuildRequest"],
+      path: "Sources/MSocketIO/MSocketIO"
+    ),
+    .target(
+      name: "MCombineSocketIO",
+      dependencies: ["MSocketIO"],
+      path: "Sources/MSocketIO/MSocketIOCombine"
+    ),
+    .target(
+      name: "MRxSwiftSocketIO",
+      dependencies: ["MSocketIO", "RxSwift"],
+      path: "Sources/MSocketIO/MSocketIORxSwift"
+    ),
+    .target(
+      name: "MReactiveSwiftSocketIO",
+      dependencies: ["MSocketIO", "ReactiveSwift"],
+      path: "Sources/MSocketIO/MSocketIOReactiveSwift"
+    ),
+    /**
+     Test Target
+     - Request
+     - Websocket
+     - SocketIO
+     */
+//    .testTarget(
+//      name: "MRequestTests",
+//      dependencies: [
+//        "Alamofire",
+//        "RxSwift",
+//        "ReactiveSwift",
+//        "MRequest",
+//        "MCombineRequest",
+//        "MRxSwiftRequest",
+//        "MReactiveSwiftRequest"
+//      ]
+//    ),
+//    .testTarget(
+//      name: "MWebSocketTests",
+//      dependencies: [
+//        "Starscream",
+//        "RxSwift",
+//        "ReactiveSwift",
+//        "MWebSocket",
+//        "MCombineWebSocket",
+//        "MRxSwiftWebSocket",
+//        "MReactiveSwiftWebSocket"
+//      ]
+//    ),
+//    .testTarget(
+//      name: "MSocketIOTests",
+//      dependencies: [
+//        "SocketIO",
+//        "RxSwift",
+//        "ReactiveSwift",
+//        "MSocketIO",
+//        "MCombineSocketIO",
+//        "MRxSwiftSocketIO",
+//        "MReactiveSwiftSocketIO"
+//      ]
+//    ),
   ]
 )

@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
         "state": {
           "branch": null,
-          "revision": "f82c23a8a7ef8dc1a49a8bfc6a96883e79121864",
-          "version": "5.5.0"
+          "revision": "78424be314842833c04bc3bef5b72e85fff99204",
+          "version": "5.6.4"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/ReactiveCocoa/ReactiveSwift.git",
         "state": {
           "branch": null,
-          "revision": "efb2f0a6f6c8739cce8fb14148a5bd3c83f2f91d",
-          "version": "7.0.0"
+          "revision": "40c465af19b993344e84355c00669ba2022ca3cd",
+          "version": "7.1.1"
         }
       },
       {
@@ -26,6 +26,15 @@
           "branch": null,
           "revision": "b4307ba0b6425c0ba4178e138799946c3da594f8",
           "version": "6.5.0"
+        }
+      },
+      {
+        "package": "SocketIO",
+        "repositoryURL": "https://github.com/socketio/socket.io-client-swift",
+        "state": {
+          "branch": null,
+          "revision": "af5ce97b755d964235348d96f6db5cbdcbe334a5",
+          "version": "16.0.1"
         }
       },
       {

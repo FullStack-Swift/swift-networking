@@ -1,7 +1,7 @@
 import Foundation
 
 public struct Rbody: RequestBuilderProtocol {
-  var data: Data?
+  private var data: Data?
   
   public init(_ data: Data?) {
     self.data = data

@@ -15,6 +15,9 @@ let socket = MSocket {
 }
 
 socket.write(string: "something")
+
+let socketIO = MSocketIO(withSourceURL: URL(urlString: "")!, timeout: 15, connectparams: [:])
+socketIO.on("event")
 ```
 ### Response Handling
 
@@ -26,6 +29,11 @@ request.sink { response in
 
 socket.sink { response in
   debugPrint(response)
+ }
+ 
+ socketIO.on("event").sink { dict in
+  debugPrint(dict)
+}
 ```
 - ReactiveSwift
 ```swift
@@ -36,6 +44,10 @@ request.producer.startWithValues { response in
 socket.producer.startWithValues { response in
   debugPrint(response)
 }
+
+socketIO.on("event").producer.startWithValues { dict in
+  debugPrint(dict)
+}
 ```
 - RxSwift
 ```swift
@@ -45,6 +57,10 @@ request.subscribe { response in
 
 socket.subscribe { response in
   debugPrint(response)
+}
+
+socketIO.on("event").subscribe { dict in 
+  debugPrint(dict)
 }
 ```
 ## Installation

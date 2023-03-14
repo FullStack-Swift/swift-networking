@@ -1,7 +1,7 @@
 import Foundation
 
 public struct RMethod: RequestBuilderProtocol {
-  let httpMethod: HTTPMethod?
+  private let httpMethod: HTTPMethod?
   
   public init(_ httpMethod: HTTPMethod) {
     self.httpMethod = httpMethod

@@ -1,15 +1,11 @@
 import Foundation
+import Alamofire
 
 public struct REncoding: RequestBuilderProtocol {
-  let encoding: ParameterEncoding
+  private let encoding: ParameterEncoding
   
-  public init(_ type: RTypeEncoding = .url) {
-    switch type {
-    case .json:
-      encoding = JSONEncoding.default
-    case .url:
-      encoding = URLEncoding.default
-    }
+  public init(_ encoding: ParameterEncoding = URLEncoding.default) {
+    self.encoding = encoding
   }
   
   public func build(request: inout URLRequest) {
@@ -20,12 +16,7 @@ public struct REncoding: RequestBuilderProtocol {
   }
 }
 
-public enum RTypeEncoding {
-  case json
-  case url
-}
-
-extension Data {
+fileprivate extension Data {
   func toDictionary() -> [String: Any]? {
     do {
       let json = try JSONSerialization.jsonObject(with: self)

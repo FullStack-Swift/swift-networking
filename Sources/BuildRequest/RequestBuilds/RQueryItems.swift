@@ -15,10 +15,9 @@ public struct RQueryItems: RequestBuilderProtocol {
   }
   
   public init(_ queryItem: [String: Any]? = nil) {
-    guard let queryItem else { return }
-    children = queryItem.compactMapValues{"\($0)"}.map {
-      RQueryParam($0.key, value: $0.value)
-    }
+    children = queryItem?.compactMapValues{"\($0)"}.map {
+        RQueryItem($0.key, value: $0.value)
+    } ?? []
   }
   
   public init(_ params: [RQueryItem]) {
