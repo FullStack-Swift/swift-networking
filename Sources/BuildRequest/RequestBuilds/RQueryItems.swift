@@ -31,13 +31,13 @@ extension RQueryItems {
   }
 }
 
-extension RQueryItems: CustomStringConvertible {
+extension RQueryItems {
   public var description: String {
-    children.map({$0.description}).toDictionary()?.toString() ?? "Null"
+    [typeName: children].description
   }
 }
 
-extension RQueryItems: CustomDebugStringConvertible {
+extension RQueryItems {
   public var debugDescription: String {
     description
   }

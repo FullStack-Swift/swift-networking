@@ -26,12 +26,12 @@ extension RQueryItem {
   }
 }
 
-extension RQueryItem: CustomStringConvertible {
+extension RQueryItem {
   public var description: String {
-    [key: value].toString() ?? "Null"
+    [typeName: [key: value].toString() ?? "nil"].description
   }
 }
-extension RQueryItem: CustomDebugStringConvertible {
+extension RQueryItem {
   public var debugDescription: String {
     description
   }

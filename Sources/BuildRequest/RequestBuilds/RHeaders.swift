@@ -12,13 +12,13 @@ public struct RHeaders: RequestProtocol {
   }
 }
 
-extension RHeaders: CustomStringConvertible {
+extension RHeaders {
   public var description: String {
-    headers.dictionary.toString() ?? "Null"
+    [typeName: headers.dictionary.toString() ?? "nil"].description
   }
 }
 
-extension RHeaders: CustomDebugStringConvertible {
+extension RHeaders {
   public var debugDescription: String {
     description
   }

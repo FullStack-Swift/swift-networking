@@ -117,3 +117,21 @@ extension _SequenceMany {
     remove(RQueryItems.self)
   }
 }
+
+extension _SequenceMany: CustomStringConvertible {
+  public var description: String {
+    var description = ""
+    for item in requests {
+      var desc = item.description
+      desc += "\n"
+      description += desc
+    }
+    return description
+  }
+}
+
+extension _SequenceMany: CustomDebugStringConvertible {
+  public var debugDescription: String {
+    description
+  }
+}

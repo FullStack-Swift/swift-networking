@@ -12,13 +12,13 @@ public struct RMethod: RequestProtocol {
   }
 }
 
-extension RMethod: CustomStringConvertible {
+extension RMethod {
   public var description: String {
-    httpMethod?.rawValue ?? "Null"
+    [typeName: httpMethod?.rawValue ?? "nil"].description
   }
 }
 
-extension RMethod: CustomDebugStringConvertible {
+extension RMethod {
   public var debugDescription: String {
     description
   }

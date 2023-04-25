@@ -22,13 +22,13 @@ public struct RPath: RequestProtocol {
   }
 }
 
-extension RPath: CustomStringConvertible {
+extension RPath {
   public var description: String {
-    path ?? "Null"
+    [typeName: path ?? "nil"].description
   }
 }
 
-extension RPath: CustomDebugStringConvertible {
+extension RPath {
   public var debugDescription: String {
     description
   }

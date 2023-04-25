@@ -18,11 +18,11 @@ import BuildRequest
 final class BuildRequestTest: XCTestCase {
   
   let requests: [RequestProtocol] = [
-    RBaseUrl(urlString: "RBaseUrl"),
-    RUrl(urlString: "RUrl"),
-    RPath(path: "RPath"),
+    RBaseUrl(urlString: "https://test.api.com.rbaseurl"),
+    RUrl(urlString: "https://test.api.com.rurl"),
+    RPath(path: "json/rpath"),
     
-    Rbody(["R": "Body"]),
+    Rbody(["username": "yourname", "password": "yourpassword"]),
     REncoding(JSONEncoding.default),
     RMethod(.post),
     
@@ -223,5 +223,11 @@ final class BuildRequestTest: XCTestCase {
     sequence.removeRQueryItems()
     XCTAssertNil(sequence.getRequest(RQueryItems.self))
     XCTAssertNil(sequence.rQueryItems)
+  }
+  
+  func test_description() {
+    // Given
+    let sequence = _SequenceMany(requests: requests)
+    print(sequence)
   }
 }

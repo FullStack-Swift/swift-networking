@@ -26,13 +26,13 @@ extension RUrl {
   }
 }
 
-extension RUrl: CustomStringConvertible {
+extension RUrl {
   public var description: String {
-    urlString
+    [typeName: urlString].description
   }
 }
 
-extension RUrl: CustomDebugStringConvertible {
+extension RUrl {
   public var debugDescription: String {
     description
   }

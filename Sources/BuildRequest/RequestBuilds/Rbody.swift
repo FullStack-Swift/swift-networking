@@ -26,13 +26,13 @@ extension Rbody {
   }
 }
 
-extension Rbody: CustomStringConvertible {
+extension Rbody {
   public var description: String {
-    data?.toString() ?? "Null"
+    [typeName: data?.toString() ?? "nil"].description
   }
 }
 
-extension Rbody: CustomDebugStringConvertible {
+extension Rbody {
   public var debugDescription: String {
     description
   }

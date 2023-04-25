@@ -69,8 +69,8 @@
         "repositoryURL": "https://github.com/pointfreeco/swift-dependencies.git",
         "state": {
           "branch": null,
-          "revision": "6bb1034e8a1bfbf46dfb766b6c09b7b17e1cba10",
-          "version": "0.2.0"
+          "revision": "98650d886ec950b587d671261f06d6b59dec4052",
+          "version": "0.4.1"
         }
       },
       {
@@ -78,7 +78,7 @@
         "repositoryURL": "https://github.com/FullStack-Swift/swift-extension",
         "state": {
           "branch": "main",
-          "revision": "f7ad4ca3f05ab0474204b9466f9709c1634e6775",
+          "revision": "6f97ddaa7c7e84be9ee86f1be8e8c1271118413c",
           "version": null
         }
       },
@@ -87,7 +87,7 @@
         "repositoryURL": "https://github.com/FullStack-Swift/swift-json",
         "state": {
           "branch": "main",
-          "revision": "b046fa097e0856d4e1cc90fddd634673cd530c7d",
+          "revision": "ac54806fd7e10587755ac5cfd802ae15ef6907d4",
           "version": null
         }
       },
@@ -96,8 +96,8 @@
         "repositoryURL": "https://github.com/pointfreeco/xctest-dynamic-overlay",
         "state": {
           "branch": null,
-          "revision": "ab8c9f45843694dd16be4297e6d44c0634fd9913",
-          "version": "0.8.4"
+          "revision": "4af50b38daf0037cfbab15514a241224c3f62f98",
+          "version": "0.8.5"
         }
       }
     ]

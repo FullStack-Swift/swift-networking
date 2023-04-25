@@ -26,13 +26,13 @@ public extension RBaseUrl {
   }
 }
 
-extension RBaseUrl: CustomStringConvertible {
+extension RBaseUrl {
   public var description: String {
-    urlString
+    [typeName: urlString].description
   }
 }
 
-extension RBaseUrl: CustomDebugStringConvertible {
+extension RBaseUrl {
   public var debugDescription: String {
     description
   }

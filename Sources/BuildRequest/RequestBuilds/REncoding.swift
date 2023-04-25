@@ -16,14 +16,20 @@ public struct REncoding: RequestProtocol {
   }
 }
 
-extension REncoding: CustomStringConvertible {
+extension REncoding {
   public var description: String {
-    String(describing: encoding)
+    [typeName: encoding.typeName].description
   }
 }
 
-extension REncoding: CustomDebugStringConvertible {
+extension REncoding {
   public var debugDescription: String {
     description
+  }
+}
+
+fileprivate extension ParameterEncoding {
+  var typeName: String {
+    String(describing: Self.self)
   }
 }

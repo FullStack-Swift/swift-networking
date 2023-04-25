@@ -87,6 +87,7 @@ public enum RequestBuilder {
   }
   
     // MARK: - buildPartialBlock
+  
   public static func buildPartialBlock(
     first: Element
   ) -> Element {

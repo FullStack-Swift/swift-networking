@@ -37,6 +37,7 @@ extension ContentView {
             self.curlRequest(curl: value)
           }
         let value: Data = try await request.data
+        print(Json(value))
         self.data = Json(value)[.key("categories")].downcastingOptional([String].self) ?? []
       } catch {
         print(error)
