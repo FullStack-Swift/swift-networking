@@ -1,7 +1,6 @@
 import Foundation
 
-/// Description
-public struct RUrl: RequestBuilderProtocol {
+public struct RUrl: RequestProtocol {
   private let urlString: String
   
   public init(urlString: String) {
@@ -13,8 +12,8 @@ public struct RUrl: RequestBuilderProtocol {
   }
 }
 
-public extension RUrl {
-  func withPath(_ path: String?) -> RUrl {
+extension RUrl {
+  public func withPath(_ path: String?) -> RUrl {
     if let path = path {
       if urlString.last == "/" {
         return .init(urlString: (urlString + path))
@@ -24,5 +23,17 @@ public extension RUrl {
     } else {
       return self
     }
+  }
+}
+
+extension RUrl: CustomStringConvertible {
+  public var description: String {
+    urlString
+  }
+}
+
+extension RUrl: CustomDebugStringConvertible {
+  public var debugDescription: String {
+    description
   }
 }

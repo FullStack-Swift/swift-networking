@@ -129,6 +129,14 @@ let package = Package(
       dependencies: ["MSocketIO", "ReactiveSwift"],
       path: "Sources/MSocketIO/MSocketIOReactiveSwift"
     ),
+    .testTarget(
+      name: "MRequestTests",
+      dependencies: [
+        "BuildRequest"
+      ]
+    )
+
+
     /**
      Test Target
      - Request

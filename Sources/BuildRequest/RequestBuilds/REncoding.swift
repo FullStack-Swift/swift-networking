@@ -1,7 +1,7 @@
 import Foundation
 import Alamofire
 
-public struct REncoding: RequestBuilderProtocol {
+public struct REncoding: RequestProtocol {
   private let encoding: ParameterEncoding
   
   public init(_ encoding: ParameterEncoding = URLEncoding.default) {
@@ -16,13 +16,14 @@ public struct REncoding: RequestBuilderProtocol {
   }
 }
 
-fileprivate extension Data {
-  func toDictionary() -> [String: Any]? {
-    do {
-      let json = try JSONSerialization.jsonObject(with: self)
-      return json as? [String: Any]
-    } catch {
-      return nil
-    }
+extension REncoding: CustomStringConvertible {
+  public var description: String {
+    String(describing: encoding)
+  }
+}
+
+extension REncoding: CustomDebugStringConvertible {
+  public var debugDescription: String {
+    description
   }
 }

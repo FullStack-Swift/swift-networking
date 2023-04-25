@@ -4,11 +4,11 @@ final public class MWebSocket {
   public var socket: WebSocket?
   public var isForceDisconnect: Bool = false
   public var urlRequest: URLRequest
-  public var parameter: RequestBuilderProtocol
+  public var parameter: RequestProtocol
   
   public init(
     urlRequest: URLRequest? = nil,
-    @RequestBuilder builder: () -> RequestBuilderProtocol
+    @RequestBuilder builder: () -> RequestProtocol
   ) {
     self.urlRequest = urlRequest ?? URLRequest(url: URL(string: "wss://")!)
     self.parameter = builder()

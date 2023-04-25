@@ -2,30 +2,101 @@ import Foundation
 
 @resultBuilder
 public enum RequestBuilder {
-  public static func buildBlock(_ components: RequestBuilderProtocol...) -> RequestBuilderProtocol {
-    MergeRequestBuilder(children: components)
+  
+  public typealias Element = RequestProtocol
+  
+    // MARK: Builder Block
+  
+  @inlinable
+  public static func buildBlock() -> EmptyRequest {
+    EmptyRequest()
   }
   
-  public static func buildArray(_ components: [RequestBuilderProtocol]) -> RequestBuilderProtocol {
-    MergeRequestBuilder(children: components)
-  }
-  
-  public static func buildBlock() -> RequestBuilderProtocol {
-    MergeRequestBuilder()
-  }
-  
-  public static func buildEither(first component: RequestBuilderProtocol) -> RequestBuilderProtocol {
+  @inlinable
+  public static func buildBlock(
+    _ component: Element
+  ) -> Element {
     component
   }
   
-  public static func buildEither(second component: RequestBuilderProtocol) -> RequestBuilderProtocol {
+  @inlinable
+  public static func buildBlock(
+    _ components: Element...
+  ) -> _SequenceMany {
+    _SequenceMany(requests: components)
+  }
+  
+  
+    // MARK: - Builder Array
+  
+  @inlinable
+  public static func buildArray(
+    _ components: [Element])
+  -> _SequenceMany {
+    _SequenceMany(requests: components)
+  }
+  
+    // MARK: - Builder Either
+  
+  @inlinable
+  public static func buildEither(
+    first component: Element
+  ) -> Element {
     component
   }
   
-  public static func buildOptional(_ component: RequestBuilderProtocol?) -> RequestBuilderProtocol {
-    guard let component = component else {
-      return MergeRequestBuilder()
-    }
-    return MergeRequestBuilder(children: [component])
+  @inlinable
+  public static func buildEither(
+    second component: Element
+  ) -> Element {
+    component
+  }
+  
+    // MARK: - Builder Expression
+  
+  @inlinable
+  public static func buildExpression(
+    _ expression: Element
+  ) -> Element {
+    expression
+  }
+  
+    // MARK: - buildFinalResult
+  
+  public static func buildFinalResult(
+    _ component: Element
+  ) -> Element {
+    component
+  }
+  
+    // MARK: - Build Limited Availability
+  
+  public static func buildLimitedAvailability(
+    _ component: Element
+  ) -> Element {
+    component
+  }
+  
+    // MARK: - Build Optional
+  
+  @inlinable
+  public static func buildOptional(
+    _ component: Element?
+  ) -> Element {
+    _SequenceMany(requests: [component].compactMap({$0}))
+  }
+  
+    // MARK: - buildPartialBlock
+  public static func buildPartialBlock(
+    first: Element
+  ) -> Element {
+    first
+  }
+  
+  public static func buildPartialBlock(
+    accumulated: Element,
+    next: Element
+  ) -> _SequenceMany {
+    _SequenceMany(requests: [accumulated, next])
   }
 }

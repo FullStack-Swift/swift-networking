@@ -1,6 +1,6 @@
 import Foundation
 
-public struct RQueryItems: RequestBuilderProtocol {
+public struct RQueryItems: RequestProtocol {
   
   private let children: [RQueryItem]
   
@@ -28,5 +28,17 @@ public struct RQueryItems: RequestBuilderProtocol {
 extension RQueryItems {
   var urlQueryItems: [URLQueryItem] {
     children.map { $0.urlQueryItem }
+  }
+}
+
+extension RQueryItems: CustomStringConvertible {
+  public var description: String {
+    children.map({$0.description}).toDictionary()?.toString() ?? "Null"
+  }
+}
+
+extension RQueryItems: CustomDebugStringConvertible {
+  public var debugDescription: String {
+    description
   }
 }

@@ -1,6 +1,6 @@
 import Foundation
 
-public struct RPath: RequestBuilderProtocol {
+public struct RPath: RequestProtocol {
   private let path: String?
   
   public init(path: String?) {
@@ -14,6 +14,22 @@ public struct RPath: RequestBuilderProtocol {
     guard let path = path else {
       return
     }
-    request.url = URL(string: (urlString + "/" + path))
+    if urlString.last == "/" {
+      request.url = URL(string: urlString + path)
+    } else {
+      request.url = URL(string: (urlString + "/" + path))
+    }
+  }
+}
+
+extension RPath: CustomStringConvertible {
+  public var description: String {
+    path ?? "Null"
+  }
+}
+
+extension RPath: CustomDebugStringConvertible {
+  public var debugDescription: String {
+    description
   }
 }

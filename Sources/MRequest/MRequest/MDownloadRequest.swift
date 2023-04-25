@@ -1,12 +1,12 @@
 import Foundation
 
-// MARK: - MRequest
-final public class MRequest {
+// MARK: - MDownloadRequest
+final public class MDownloadRequest {
   public var configuration: URLSessionConfiguration?
   public var urlRequest: URLRequest
   public var parameter: RequestProtocol
-  internal var storeDataRequest: DataRequest!
-  
+  internal var storeDownloadRequest: DownloadRequest!
+
   @discardableResult
   public init(
     urlRequest: URLRequest? = nil,
@@ -17,27 +17,26 @@ final public class MRequest {
     self.urlRequest = urlRequest ?? URLRequest(url: URL(string: "https://")!)
     self.parameter = builder()
     parameter.build(request: &self.urlRequest)
-    _ = dataRequest
+    _ = downloadRequest
   }
 }
 
-// MARK: Data Request
-public extension MRequest {
-  var dataRequest: DataRequest {
-    if storeDataRequest == nil {
+extension MDownloadRequest {
+  var downloadRequest: DownloadRequest {
+    if storeDownloadRequest == nil {
       if let configuration {
         let session = Session(configuration: configuration)
-        self.storeDataRequest = session.request(urlRequest)
+        self.storeDownloadRequest = session.download(urlRequest)
       } else {
-        self.storeDataRequest = AF.request(urlRequest)
+        self.storeDownloadRequest = AF.download(urlRequest)
       }
     }
-    return storeDataRequest
+    return storeDownloadRequest
   }
 }
 
 // MARK: CURL Description
-public extension MRequest {
+public extension MDownloadRequest {
   func printCURLRequest(
     filename: String = #file,
     line: Int = #line,
@@ -51,7 +50,7 @@ public extension MRequest {
         return ""
       }
     }
-    dataRequest
+    downloadRequest
       .cURLDescription(calling: { value in
         let value = value.dropFirst(2)
         Swift.print("⚠️ cURLDescription [[\(sourceFileName(filePath: filename))]:\(line) \(funcName)]")
@@ -59,71 +58,63 @@ public extension MRequest {
       })
     return self
   }
-  
-  func cURLDescription(_ cURL: @escaping(String) -> Void) -> Self {
-    dataRequest
-      .cURLDescription(calling: cURL)
-    return self
-  }
-}
 
-// MARK: Configuration DataRequest
-public extension MRequest {
-  func withDataRequest(_ block: (inout DataRequest) -> Void) -> Self {
-    block(&storeDataRequest)
+  func cURLDescription(_ cURL: @escaping(String) -> Void) -> Self {
+    downloadRequest
+      .cURLDescription(calling: cURL)
     return self
   }
 }
 
 /// Value used to `await` a `DataResponse` and associated values.
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
-public extension MRequest {
+public extension MDownloadRequest {
   // MARK: - serializingResponse
   func serializingResponse<Serializer: ResponseSerializer>(
     using serializer: Serializer,
     automaticallyCancelling shouldAutomaticallyCancel: Bool = false
-  ) -> DataTask<Serializer.SerializedObject> {
-    dataRequest
-      .serializingResponse(
+  ) -> DownloadTask<Serializer.SerializedObject> {
+    downloadRequest
+      .serializingDownload(
         using: serializer,
         automaticallyCancelling: shouldAutomaticallyCancel
       )
   }
-  
-  func serializingResponse<Serializer: DataResponseSerializerProtocol>(
+
+  func serializingResponse<Serializer: DownloadResponseSerializerProtocol>(
     using serializer: Serializer,
     automaticallyCancelling shouldAutomaticallyCancel: Bool = false
-  ) -> DataTask<Serializer.SerializedObject> {
-    dataRequest
-      .serializingResponse(
+  ) -> DownloadTask<Serializer.SerializedObject> {
+    downloadRequest
+      .serializingDownload(
         using: serializer,
         automaticallyCancelling: shouldAutomaticallyCancel
       )
   }
-  
+
   // MARK: - Response
   func response<Serializer: ResponseSerializer>(
     using serializer: Serializer,
     automaticallyCancelling shouldAutomaticallyCancel: Bool = false
-  ) async -> DataResponse<Serializer.SerializedObject, AFError> {
+  ) async -> DownloadResponse<Serializer.SerializedObject, AFError> {
     await serializingResponse(
       using: serializer,
       automaticallyCancelling: shouldAutomaticallyCancel
     )
     .response
   }
-  
-  func response<Serializer: DataResponseSerializerProtocol>(
+
+  func response<Serializer: DownloadResponseSerializerProtocol>(
     using serializer: Serializer,
     automaticallyCancelling shouldAutomaticallyCancel: Bool = false
-  ) async -> DataResponse<Serializer.SerializedObject, AFError> {
+  ) async -> DownloadResponse<Serializer.SerializedObject, AFError> {
     await serializingResponse(
       using: serializer,
       automaticallyCancelling: shouldAutomaticallyCancel
     )
     .response
   }
-  
+
   // MARK: - Result
   func result<Serializer: ResponseSerializer>(
     using serializer: Serializer,
@@ -135,8 +126,8 @@ public extension MRequest {
     )
     .result
   }
-  
-  func result<Serializer: DataResponseSerializerProtocol>(
+
+  func result<Serializer: DownloadResponseSerializerProtocol>(
     using serializer: Serializer,
     automaticallyCancelling shouldAutomaticallyCancel: Bool = false
   ) async -> Result<Serializer.SerializedObject, AFError> {
@@ -146,14 +137,14 @@ public extension MRequest {
     )
     .result
   }
-  
+
   // MARK: - Decodeabe
   func serializingDecodeable<Value: Decodable>(
     _ type: Value.Type = Value.self
-  ) async -> DataTask<Value> {
-    dataRequest.serializingDecodable(Value.self)
+  ) async -> DownloadTask<Value> {
+    downloadRequest.serializingDecodable(Value.self)
   }
-  
+
   func resultDecodeable<Value: Decodable>(
     _ type: Value.Type = Value.self
   ) async -> Result<Value, AFError> {
@@ -163,35 +154,35 @@ public extension MRequest {
   func decodeable<Value: Decodable>(_ type: Value.Type = Value.self) async throws -> Value {
     try await serializingDecodeable(Value.self).value
   }
-  
+
   // MARK: - Data
-  var serializingData: DataTask<Data> {
+  var serializingData: DownloadTask<Data> {
     get async {
-      dataRequest.serializingData()
+      downloadRequest.serializingData()
     }
   }
-  
+
   func resultData() async -> Result<Data, AFError> {
     await serializingData.result
   }
-  
+
   var data: Data {
     get async throws {
       return try await serializingData.value
     }
   }
-  
+
   // MARK: - String
-  var serializingString: DataTask<String> {
+  var serializingString: DownloadTask<String> {
     get async {
-      dataRequest.serializingString()
+      downloadRequest.serializingString()
     }
   }
-  
+
   func resultString() async -> Result<String, AFError> {
     await serializingString.result
   }
-  
+
   var string: String {
     get async throws {
       return try await serializingString.value
