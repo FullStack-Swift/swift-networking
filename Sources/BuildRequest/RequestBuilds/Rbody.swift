@@ -16,11 +16,11 @@ extension Rbody {
   public init(_ string: String?) {
     self.init(string?.toData())
   }
-
+  
   public init<Key: Hashable, Value>(_ dictionary: Dictionary<Key, Value>) {
     self.init(dictionary.toData())
   }
-
+  
   public init(_ model: Encodable) {
     self.init(model.toData())
   }

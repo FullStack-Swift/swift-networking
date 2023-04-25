@@ -5,43 +5,45 @@ public protocol RequestProtocol {
 }
 
 extension RequestProtocol {
-
+  
   public func build(request: URLRequest) {
-
+    
   }
-
+  
   public func executing(
     request: inout URLRequest,
     requests: [RequestProtocol]
   ) {
-    if requests.isEmpty {
-      return
-    }
+    if requests.isEmpty { return }
     var items: [RequestProtocol] = []
-      /// url
     for item in requests {
       if item is RBaseUrl {
         items.append(item)
-      } else if item is RUrl {
+      }
+      if item is RUrl {
         items.append(item)
       }
       if item is RPath {
         items.append(item)
       }
-    }
-      /// other
-    for item in requests {
-      if !(item is RUrl || item is REncoding || item is RPath) {
+      if item is RMethod {
         items.append(item)
       }
-    }
-      /// encoding
-    for item in requests {
+      if item is Rbody {
+        items.append(item)
+      }
+      
+      if item is RHeaders {
+        items.append(item)
+      }
+      if (item is RQueryItem) || (item is RQueryItems) {
+        items.append(item)
+      }
       if item is REncoding {
         items.append(item)
       }
     }
-      /// build
+    /// build
     items.forEach {
       $0.build(request: &request)
     }

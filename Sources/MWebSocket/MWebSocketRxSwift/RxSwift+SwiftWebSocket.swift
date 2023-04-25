@@ -1,7 +1,7 @@
 import Foundation
 import RxSwift
 
-  // MARK: - RxSwift
+// MARK: - RxSwift
 extension MWebSocket: ObservableType {
   public typealias Element = WebSocketEvent
   public func subscribe<Observer>(
@@ -14,12 +14,12 @@ extension MWebSocket: ObservableType {
 extension MWebSocket: ObserverType {
   public func on(_ event: Event<WebSocketEvent>) {
     switch event {
-    case .next:
-      break
-    case .error:
-      break
-    case .completed:
-      break
+      case .next:
+        break
+      case .error:
+        break
+      case .completed:
+        break
     }
   }
 }

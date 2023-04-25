@@ -17,7 +17,7 @@ extension MRequest: ObserverType {
   }
 }
 
-  // MARK: - publisher
+// MARK: - publisher
 extension MRequest {
   public func publisher() -> Single<AFDataResponse<Data?>> {
     dataRequest.rx.response()

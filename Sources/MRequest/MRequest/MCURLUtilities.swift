@@ -163,7 +163,7 @@ internal struct HandlerCommands {
     }
     return options
   }
-
+  
   
   fileprivate static func handleShortCommands(_ tokens: [String], _ index: Int, _ token: String, _ options: inout [CRLDataType]) throws {
     let nextToken = tokens[index]
@@ -250,7 +250,7 @@ internal struct HandlerCommands {
         throw CURLError.noSuchOption(components[0])
     }
   }
-
+  
   internal static func transformToCURLData(_ options: [CRLDataType]) throws -> CURLData {
     var url: String = ""
     var user: String?

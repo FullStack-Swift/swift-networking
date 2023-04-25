@@ -9,11 +9,11 @@ internal extension Dictionary {
       return nil
     }
   }
-
+  
   func toModel<D>(_ type: D.Type, using decoder: JSONDecoder? = nil) -> D? where D : Decodable {
     toData()?.toModel(type, using: decoder)
   }
-
+  
   func toString(using: String.Encoding = .utf8) -> String? {
     guard let data = self.toData() else {return nil}
     return String(data: data, encoding: using)
@@ -26,27 +26,27 @@ internal extension Encodable {
     let encoder = encoder ?? JSONEncoder()
     return try? encoder.encode(self)
   }
-
+  
   func toDictionary(using encoder: JSONEncoder? = nil) -> [String: Any]? {
     toData(using: encoder)?.toDictionary()
   }
-
+  
   func toModel<D>(_ type: D.Type, using encoder: JSONEncoder? = nil) -> D? where D: Decodable {
     toData(using: encoder)?.toModel(type)
   }
 }
 
-  // MARK: Data
+// MARK: Data
 internal extension Data {
   func toString(encoding: String.Encoding = .utf8) -> String? {
     String(data: self, encoding: encoding)
   }
-
+  
   func toModel<D>(_ type: D.Type, using decoder: JSONDecoder? = nil) -> D? where D: Decodable {
     let decoder = decoder ?? JSONDecoder()
     return try? decoder.decode(type, from: self)
   }
-
+  
   func toDictionary() -> [String: Any]? {
     do {
       let json = try JSONSerialization.jsonObject(with: self)
@@ -55,7 +55,7 @@ internal extension Data {
       return nil
     }
   }
-
+  
 #if os(iOS)
   func toData(keyPath: String? = nil) -> Self {
     guard let keyPath = keyPath else {
@@ -78,16 +78,16 @@ internal extension Data {
 #endif
 }
 
-  // MARK: String
+// MARK: String
 internal extension String {
   func toData(using:String.Encoding = .utf8) -> Data? {
     return self.data(using: using)
   }
-
+  
   func toModel<D>(_ type: D.Type, using decoder: JSONDecoder? = nil) -> D? where D : Decodable {
     return self.toData()?.toModel(type,using: decoder)
   }
-
+  
   func toDictionary() -> [String: Any]? {
     guard let data = self.toData() else {return nil}
     do {

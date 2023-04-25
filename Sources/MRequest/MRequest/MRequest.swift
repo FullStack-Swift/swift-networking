@@ -159,8 +159,10 @@ public extension MRequest {
   ) async -> Result<Value, AFError> {
     await serializingDecodeable(Value.self).result
   }
-
-  func decodeable<Value: Decodable>(_ type: Value.Type = Value.self) async throws -> Value {
+  
+  func decodeable<Value: Decodable>(
+    _ type: Value.Type = Value.self
+  ) async throws -> Value {
     try await serializingDecodeable(Value.self).value
   }
   

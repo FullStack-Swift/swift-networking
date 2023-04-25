@@ -6,7 +6,7 @@ final public class MUploadRequest {
   public var urlRequest: URLRequest
   public var parameter: RequestProtocol
   internal var storeUploadRequest: UploadRequest!
-
+  
   @discardableResult
   public init(
     urlRequest: URLRequest? = nil,
@@ -58,10 +58,18 @@ public extension MUploadRequest {
       })
     return self
   }
-
+  
   func cURLDescription(_ cURL: @escaping(String) -> Void) -> Self {
     uploadRequest
       .cURLDescription(calling: cURL)
+    return self
+  }
+}
+
+// MARK: Configuration DataRequest
+public extension MUploadRequest {
+  func withDataRequest(_ block: (inout UploadRequest) -> Void) -> Self {
+    block(&storeUploadRequest)
     return self
   }
 }
@@ -80,7 +88,7 @@ public extension MUploadRequest {
         automaticallyCancelling: shouldAutomaticallyCancel
       )
   }
-
+  
   func serializingResponse<Serializer: DataResponseSerializerProtocol>(
     using serializer: Serializer,
     automaticallyCancelling shouldAutomaticallyCancel: Bool = false
@@ -91,7 +99,7 @@ public extension MUploadRequest {
         automaticallyCancelling: shouldAutomaticallyCancel
       )
   }
-
+  
   // MARK: - Response
   func response<Serializer: ResponseSerializer>(
     using serializer: Serializer,
@@ -103,7 +111,7 @@ public extension MUploadRequest {
     )
     .response
   }
-
+  
   func response<Serializer: DataResponseSerializerProtocol>(
     using serializer: Serializer,
     automaticallyCancelling shouldAutomaticallyCancel: Bool = false
@@ -114,7 +122,7 @@ public extension MUploadRequest {
     )
     .response
   }
-
+  
   // MARK: - Result
   func result<Serializer: ResponseSerializer>(
     using serializer: Serializer,
@@ -126,7 +134,7 @@ public extension MUploadRequest {
     )
     .result
   }
-
+  
   func result<Serializer: DataResponseSerializerProtocol>(
     using serializer: Serializer,
     automaticallyCancelling shouldAutomaticallyCancel: Bool = false
@@ -137,52 +145,54 @@ public extension MUploadRequest {
     )
     .result
   }
-
+  
   // MARK: - Decodeabe
   func serializingDecodeable<Value: Decodable>(
     _ type: Value.Type = Value.self
   ) async -> DataTask<Value> {
     uploadRequest.serializingDecodable(Value.self)
   }
-
+  
   func resultDecodeable<Value: Decodable>(
     _ type: Value.Type = Value.self
   ) async -> Result<Value, AFError> {
     await serializingDecodeable(Value.self).result
   }
-
-  func decodeable<Value: Decodable>(_ type: Value.Type = Value.self) async throws -> Value {
+  
+  func decodeable<Value: Decodable>(
+    _ type: Value.Type = Value.self
+  ) async throws -> Value {
     try await serializingDecodeable(Value.self).value
   }
-
+  
   // MARK: - Data
   var serializingData: DataTask<Data> {
     get async {
       uploadRequest.serializingData()
     }
   }
-
+  
   func resultData() async -> Result<Data, AFError> {
     await serializingData.result
   }
-
+  
   var data: Data {
     get async throws {
       return try await serializingData.value
     }
   }
-
+  
   // MARK: - String
   var serializingString: DataTask<String> {
     get async {
       uploadRequest.serializingString()
     }
   }
-
+  
   func resultString() async -> Result<String, AFError> {
     await serializingString.result
   }
-
+  
   var string: String {
     get async throws {
       return try await serializingString.value

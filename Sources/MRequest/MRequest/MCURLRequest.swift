@@ -19,7 +19,7 @@ public struct MCURLRequest {
   public var urlRequest: URLRequest
   
   private var cURLData: CURLData
-
+  
   public init?(_ str: String) {
     self.urlRequest = URLRequest(url: URL(string: "https://")!)
     if let result = try? CURLCommands(command: str).cURLData() {

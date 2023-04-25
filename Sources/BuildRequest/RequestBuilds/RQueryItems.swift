@@ -16,7 +16,7 @@ public struct RQueryItems: RequestProtocol {
   
   public init(_ queryItem: [String: Any]? = nil) {
     children = queryItem?.compactMapValues{"\($0)"}.map {
-        RQueryItem($0.key, value: $0.value)
+      RQueryItem($0.key, value: $0.value)
     } ?? []
   }
   

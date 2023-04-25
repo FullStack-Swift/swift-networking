@@ -1,17 +1,13 @@
 import Foundation
 
 public struct _SequenceMany: RequestProtocol {
-
+  
   public var requests: [RequestProtocol]
-
+  
   public init(requests: [RequestProtocol] = []) {
     self.requests = requests
   }
-
-  public init(ArrayRequestBuilder builder: () -> [RequestProtocol]) {
-    self.requests = builder()
-  }
-
+  
   public func build(request: inout URLRequest) {
     executing(request: &request, requests: requests)
   }
@@ -19,7 +15,7 @@ public struct _SequenceMany: RequestProtocol {
 
 // MARK: Get Properties
 extension _SequenceMany {
-  public func getRequestProtocol<R: RequestProtocol>(
+  public func getRequest<R: RequestProtocol>(
     _ type: R.Type
   ) -> R? {
     for item in requests where item is R {
@@ -27,53 +23,97 @@ extension _SequenceMany {
     }
     return nil
   }
-
-  public var rBody: Rbody? {
-    getRequestProtocol(Rbody.self)
+  
+  public var rBaseUrl: RBaseUrl? {
+    getRequest(RBaseUrl.self)
   }
-
-  public var rMethod: RMethod? {
-    getRequestProtocol(RMethod.self)
-  }
-
+  
   public var rUrl: RUrl? {
-    getRequestProtocol(RUrl.self)
+    getRequest(RUrl.self)
   }
-
+  
   public var rPath: RPath? {
-    getRequestProtocol(RPath.self)
+    getRequest(RPath.self)
   }
-
+  
+  public var rBody: Rbody? {
+    getRequest(Rbody.self)
+  }
+  
+  public var rMethod: RMethod? {
+    getRequest(RMethod.self)
+  }
+  
   public var rEndCoding: REncoding? {
-    getRequestProtocol(REncoding.self)
+    getRequest(REncoding.self)
   }
-
+  
   public var rHeaders: RHeaders? {
-    getRequestProtocol(RHeaders.self)
+    getRequest(RHeaders.self)
   }
-
+  
   public var rQueryItem: RQueryItem? {
-    getRequestProtocol(RQueryItem.self)
+    getRequest(RQueryItem.self)
   }
-
+  
   public var rQueryItems: RQueryItems? {
-    getRequestProtocol(RQueryItems.self)
+    getRequest(RQueryItems.self)
   }
 }
 
-  // MARK: Remove Properties
+// MARK: Remove Properties
 extension _SequenceMany {
   @discardableResult
-  public mutating func remove<R: RequestProtocol>(_ type: R.Type) -> Self {
+  public mutating func remove<R: RequestProtocol>(
+    _ type: R.Type
+  ) -> Self {
     self.requests.removeAll(where: {$0 is R})
     return self
   }
-
+  
+  @discardableResult
+  public mutating func removeRBaseUrl() -> Self {
+    remove(RBaseUrl.self)
+  }
+  
+  @discardableResult
+  public mutating func removeRUrl() -> Self {
+    remove(RUrl.self)
+  }
+  
+  
+  @discardableResult
+  public mutating func removeRPath() -> Self {
+    remove(RPath.self)
+  }
+  
+  @discardableResult
   public mutating func removeRBody() -> Self {
     remove(Rbody.self)
   }
-
+  
+  @discardableResult
+  public mutating func removeRMethod() -> Self {
+    remove(RMethod.self)
+  }
+  
+  @discardableResult
+  public mutating func removeREncoding() -> Self {
+    remove(REncoding.self)
+  }
+  
+  @discardableResult
   public mutating func removeRHeaders() -> Self {
     remove(RHeaders.self)
+  }
+  
+  @discardableResult
+  public mutating func removeRQueryItem() -> Self {
+    remove(RQueryItem.self)
+  }
+  
+  @discardableResult
+  public mutating func removeRQueryItems() -> Self {
+    remove(RQueryItems.self)
   }
 }

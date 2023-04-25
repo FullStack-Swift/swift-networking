@@ -1,7 +1,7 @@
 import Foundation
 import ReactiveSwift
 
-  // MARK: - ReactiveSwift
+// MARK: - ReactiveSwift
 extension MWebSocket: SignalProducerProtocol, SignalProducerConvertible {
   public var producer: SignalProducer<WebSocketEvent,Never> {
     publisher()
