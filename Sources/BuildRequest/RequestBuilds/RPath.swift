@@ -11,13 +11,14 @@ public struct RPath: RequestProtocol {
     guard let urlString = request.url?.absoluteString else {
       return
     }
-    guard let path = path else {
-      return
-    }
-    if urlString.last == "/" {
-      request.url = URL(string: urlString + path)
-    } else {
-      request.url = URL(string: (urlString + "/" + path))
+    if let path = path {
+      if urlString.last == "/" && path.first == "/" {
+        request.url = URL(string: urlString + path.dropFirst())
+      } else if urlString.last == "/" || path.first == "/" {
+        request.url = URL(string: urlString + path)
+      } else {
+        request.url = URL(string: (urlString + "/" + path))
+      }
     }
   }
 }

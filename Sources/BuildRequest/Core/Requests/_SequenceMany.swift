@@ -23,11 +23,7 @@ extension _SequenceMany {
     }
     return nil
   }
-  
-  public var rBaseUrl: RBaseUrl? {
-    getRequest(RBaseUrl.self)
-  }
-  
+    
   public var rUrl: RUrl? {
     getRequest(RUrl.self)
   }
@@ -69,11 +65,6 @@ extension _SequenceMany {
   ) -> Self {
     self.requests.removeAll(where: {$0 is R})
     return self
-  }
-  
-  @discardableResult
-  public mutating func removeRBaseUrl() -> Self {
-    remove(RBaseUrl.self)
   }
   
   @discardableResult
