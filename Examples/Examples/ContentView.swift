@@ -29,7 +29,7 @@ extension ContentView {
     Task {
       do {
         let request = MRequest {
-          RUrl(urlString: "https://api.publicapis.org/categories")
+          RUrl("https://api.publicapis.org/categories")
         }
           .printCURLRequest()
           .cURLDescription { curl in

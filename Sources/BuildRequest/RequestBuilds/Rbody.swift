@@ -17,6 +17,10 @@ extension Rbody {
     self.init(string?.toData())
   }
   
+  public init(_ initial: () -> String?) {
+    self.init(initial())
+  }
+  
   public init<Key: Hashable, Value>(_ dictionary: Dictionary<Key, Value>) {
     self.init(dictionary.toData())
   }

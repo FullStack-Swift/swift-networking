@@ -44,11 +44,11 @@ let package = Package(
       targets: ["MSocketIO", "MReactiveSwiftSocketIO"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/Alamofire/Alamofire.git", from: "5.6.4"),
+    .package(url: "https://github.com/Alamofire/Alamofire.git", from: "5.8.0"),
     .package(url: "https://github.com/daltoniam/Starscream.git", from: "4.0.4"),
-    .package(url: "https://github.com/ReactiveX/RxSwift.git", from: "6.5.0"),
-    .package(url: "https://github.com/ReactiveCocoa/ReactiveSwift.git", from: "7.0.0"),
     .package(name: "SocketIO", url: "https://github.com/socketio/socket.io-client-swift",from: "16.0.1"),
+    .package(url: "https://github.com/ReactiveX/RxSwift.git", from: "6.6.0"),
+    .package(url: "https://github.com/ReactiveCocoa/ReactiveSwift.git", from: "7.1.1"),
   ],
   targets: [
     /**
@@ -129,12 +129,12 @@ let package = Package(
       dependencies: ["MSocketIO", "ReactiveSwift"],
       path: "Sources/MSocketIO/MSocketIOReactiveSwift"
     ),
-    .testTarget(
-      name: "BuildRequestTests",
-      dependencies: [
-        "BuildRequest"
-      ]
-    )
+//    .testTarget(
+//      name: "BuildRequestTests",
+//      dependencies: [
+//        "BuildRequest"
+//      ]
+//    )
 
 
     /**

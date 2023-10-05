@@ -4,13 +4,26 @@
 ```swift
 let urlString = "https://httpbin.org/get"
 let request = MRequest {
+  RUrl(urlString)
+  RPath(path)
+  Rbody(data)
+  REncoding(JSONEncoding.default)
   RMethod(.get)
-  RUrl(urlString: urlString)
+  RHeaders()
+  RQueryItem()
+  RQueryItems()
   /// somthing else
 }
 
 let socket = MSocket {
-  RUrl(urlString: urlString)
+  RUrl(urlString)
+  RPath(path)
+  Rbody(data)
+  REncoding(JSONEncoding.default)
+  RMethod(.get)
+  RHeaders()
+  RQueryItem()
+  RQueryItems()
   /// somthing else
 }
 
@@ -20,6 +33,27 @@ let socketIO = MSocketIO(withSourceURL: URL(urlString: "")!, timeout: 15, connec
 socketIO.on("event")
 ```
 ### Response Handling
+
+- Async
+```swift
+/// Data
+let data = try await request.data
+
+/// String
+let string = try await request.string
+
+/// Result<Data, AFError>
+let result = await request.resultData
+
+/// Result<String, AFError>
+let result = await request.resultString
+
+/// DataTask<Data>
+let data = await request.serializingData
+
+/// DataTask<String>
+let string = await request.serializingString
+```
 
 - Combine
 ```swift
@@ -63,6 +97,21 @@ socketIO.on("event").subscribe { dict in
   debugPrint(dict)
 }
 ```
+
+- CURL
+```swift
+let request: = ...
+request
+.printCURLRequest() // -> Self
+
+
+request
+.cURLDescription { curl in
+  // Todo with curl
+} // -> Self
+
+```
+
 ## Installation
 
 ### Swift Package Manager

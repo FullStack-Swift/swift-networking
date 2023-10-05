@@ -26,6 +26,12 @@ public struct RQueryItems: RequestProtocol {
 }
 
 extension RQueryItems {
+  public init(_ initial: () -> [String: Any]?) {
+    self.init(initial())
+  }
+}
+
+extension RQueryItems {
   var urlQueryItems: [URLQueryItem] {
     children.map { $0.urlQueryItem }
   }

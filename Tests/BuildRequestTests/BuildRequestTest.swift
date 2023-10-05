@@ -2,7 +2,6 @@ import XCTest
 import BuildRequest
 
 /*
- RBaseUrl
  RUrl
  RPath
  
@@ -18,15 +17,14 @@ import BuildRequest
 final class BuildRequestTest: XCTestCase {
   
   let requests: [RequestProtocol] = [
-    RBaseUrl(urlString: "https://test.api.com.rbaseurl"),
-    RUrl(urlString: "https://test.api.com.rurl"),
-    RPath(path: "json/rpath"),
+    RUrl("https://test.api.com.rurl"),
+    RPath("json/rpath"),
     
     Rbody(["username": "yourname", "password": "yourpassword"]),
     REncoding(JSONEncoding.default),
     RMethod(.post),
     
-    RHeaders(headers: .init(["R1": "RHeaders1", "R2": "RHeaders2", "R3": "RHeaders3"])),
+    RHeaders(.init(["R1": "RHeaders1", "R2": "RHeaders2", "R3": "RHeaders3"])),
     RQueryItem("key_RQueryItem", value: "value_RQueryItem"),
     RQueryItems(["key_RQueryItems": "value_RQueryItems"]),
   ]
@@ -35,7 +33,7 @@ final class BuildRequestTest: XCTestCase {
     // Given
     let sequence = _SequenceMany(requests: requests)
     // When
-    let rBaseUrl = sequence.getRequest(RBaseUrl.self)
+    let rBaseUrl = sequence.getRequest(RUrl.self)
     let rUrl = sequence.getRequest(RUrl.self)
     let rPath = sequence.getRequest(RPath.self)
     
@@ -64,7 +62,6 @@ final class BuildRequestTest: XCTestCase {
     // Given
     let sequence = _SequenceMany(requests: requests)
     // When
-    let rBaseUrl = sequence.rBaseUrl
     let rUrl = sequence.rUrl
     let rPath = sequence.rPath
     
@@ -76,7 +73,6 @@ final class BuildRequestTest: XCTestCase {
     let rQueryItem = sequence.rQueryItem
     let rQueryItems = sequence.rQueryItems
     // Then
-    XCTAssertNotNil(rBaseUrl)
     XCTAssertNotNil(rBody)
     XCTAssertNotNil(rMethod)
     
@@ -92,14 +88,6 @@ final class BuildRequestTest: XCTestCase {
   func test_SequenceMany_removeRequestWithType() {
     // Given
     var sequence = _SequenceMany(requests: requests)
-    
-    // RBaseUrl
-    XCTAssertNotNil(sequence.getRequest(RBaseUrl.self))
-    XCTAssertNotNil(sequence.rBaseUrl)
-    sequence.remove(RBaseUrl.self)
-    XCTAssertNil(sequence.getRequest(RBaseUrl.self))
-    XCTAssertNil(sequence.rBaseUrl)
-    
     // RUrl
     XCTAssertNotNil(sequence.getRequest(RUrl.self))
     XCTAssertNotNil(sequence.rUrl)
@@ -160,13 +148,6 @@ final class BuildRequestTest: XCTestCase {
   func test_SequenceMany_removeRequest() {
     // Given
     var sequence = _SequenceMany(requests: requests)
-    
-    // RBaseUrl
-    XCTAssertNotNil(sequence.getRequest(RBaseUrl.self))
-    XCTAssertNotNil(sequence.rBaseUrl)
-    sequence.removeRBaseUrl()
-    XCTAssertNil(sequence.getRequest(RBaseUrl.self))
-    XCTAssertNil(sequence.rBaseUrl)
     
     // RUrl
     XCTAssertNotNil(sequence.getRequest(RUrl.self))

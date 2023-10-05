@@ -3,7 +3,7 @@ import Foundation
 public struct RPath: RequestProtocol {
   private let path: String?
   
-  public init(path: String?) {
+  public init(_ path: String?) {
     self.path = path
   }
   
@@ -22,6 +22,13 @@ public struct RPath: RequestProtocol {
     }
   }
 }
+
+extension RPath {
+  public init(_ initial: () -> String?) {
+    self.init(initial())
+  }
+}
+
 
 extension RPath {
   public var description: String {

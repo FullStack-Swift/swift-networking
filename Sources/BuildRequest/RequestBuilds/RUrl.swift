@@ -3,7 +3,7 @@ import Foundation
 public struct RUrl: RequestProtocol {
   private let urlString: String
   
-  public init(urlString: String) {
+  public init(_ urlString: String) {
     self.urlString = urlString
   }
   
@@ -13,14 +13,21 @@ public struct RUrl: RequestProtocol {
 }
 
 extension RUrl {
+  public init(_ initial: () -> String) {
+    self.init(initial())
+  }
+}
+
+extension RUrl {
   public func withPath(_ path: String?) -> RUrl {
+    let forwardSlash: Character = "/"
     if let path = path {
-      if urlString.last == "/" && path.first == "/" {
-        return .init(urlString: (urlString + path.dropFirst()))
-      } else if urlString.last == "/" || path.first == "/" {
-        return .init(urlString: (urlString + path))
+      if urlString.last == forwardSlash && path.first == forwardSlash {
+        return .init((urlString + path.dropFirst()))
+      } else if urlString.last == forwardSlash || path.first == forwardSlash {
+        return .init((urlString + path))
       } else {
-        return .init(urlString: (urlString + "/" + path))
+        return .init((urlString + String(forwardSlash) + path))
       }
     } else {
       return self

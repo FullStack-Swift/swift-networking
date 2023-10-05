@@ -6,10 +6,10 @@ public class AuthService: BaseService {
 
   func login(email: String, password: String) -> MRequest {
     MRequest {
-      RUrl(urlString: urlString)
+      RUrl(urlString)
         .withPath("v1")
         .withPath("login")
-      RHeaders(headers: noAuthHeader)
+      RHeaders(noAuthHeader)
       RMethod(.post)
       Rbody(["email": email, "password": password].toData())
     }
@@ -17,10 +17,10 @@ public class AuthService: BaseService {
 
   func register(email: String, password: String) -> MRequest {
     MRequest {
-      RUrl(urlString: urlString)
+      RUrl(urlString)
         .withPath("v1")
         .withPath("register")
-      RHeaders(headers: noAuthHeader)
+      RHeaders(noAuthHeader)
       RMethod(.post)
       Rbody(["email": email, "password": password].toData())
     }

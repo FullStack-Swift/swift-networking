@@ -1,7 +1,7 @@
 import Foundation
 
 // MARK: - MRequest
-final public class MRequest {
+open class MRequest {
   public var configuration: URLSessionConfiguration?
   public var urlRequest: URLRequest
   public var parameter: RequestProtocol
@@ -22,8 +22,8 @@ final public class MRequest {
 }
 
 // MARK: Data Request
-public extension MRequest {
-  var dataRequest: DataRequest {
+extension MRequest {
+  public var dataRequest: DataRequest {
     if storeDataRequest == nil {
       if let configuration {
         let session = Session(configuration: configuration)
@@ -37,8 +37,8 @@ public extension MRequest {
 }
 
 // MARK: CURL Description
-public extension MRequest {
-  func printCURLRequest(
+extension MRequest {
+  public func printCURLRequest(
     filename: String = #file,
     line: Int = #line,
     funcName: String = #function
@@ -60,7 +60,7 @@ public extension MRequest {
     return self
   }
   
-  func cURLDescription(_ cURL: @escaping(String) -> Void) -> Self {
+  public func cURLDescription(_ cURL: @escaping(String) -> Void) -> Self {
     dataRequest
       .cURLDescription(calling: cURL)
     return self
@@ -77,9 +77,9 @@ public extension MRequest {
 
 /// Value used to `await` a `DataResponse` and associated values.
 @available(macOS 10.15, iOS 13, tvOS 13, watchOS 6, *)
-public extension MRequest {
+extension MRequest {
   // MARK: - serializingResponse
-  func serializingResponse<Serializer: ResponseSerializer>(
+  public func serializingResponse<Serializer: ResponseSerializer>(
     using serializer: Serializer,
     automaticallyCancelling shouldAutomaticallyCancel: Bool = false
   ) -> DataTask<Serializer.SerializedObject> {
@@ -90,7 +90,7 @@ public extension MRequest {
       )
   }
   
-  func serializingResponse<Serializer: DataResponseSerializerProtocol>(
+  public func serializingResponse<Serializer: DataResponseSerializerProtocol>(
     using serializer: Serializer,
     automaticallyCancelling shouldAutomaticallyCancel: Bool = false
   ) -> DataTask<Serializer.SerializedObject> {
@@ -102,7 +102,7 @@ public extension MRequest {
   }
   
   // MARK: - Response
-  func response<Serializer: ResponseSerializer>(
+  public func response<Serializer: ResponseSerializer>(
     using serializer: Serializer,
     automaticallyCancelling shouldAutomaticallyCancel: Bool = false
   ) async -> DataResponse<Serializer.SerializedObject, AFError> {
@@ -113,7 +113,7 @@ public extension MRequest {
     .response
   }
   
-  func response<Serializer: DataResponseSerializerProtocol>(
+  public func response<Serializer: DataResponseSerializerProtocol>(
     using serializer: Serializer,
     automaticallyCancelling shouldAutomaticallyCancel: Bool = false
   ) async -> DataResponse<Serializer.SerializedObject, AFError> {
@@ -125,7 +125,7 @@ public extension MRequest {
   }
   
   // MARK: - Result
-  func result<Serializer: ResponseSerializer>(
+  public func result<Serializer: ResponseSerializer>(
     using serializer: Serializer,
     automaticallyCancelling shouldAutomaticallyCancel: Bool = false
   ) async -> Result<Serializer.SerializedObject, AFError> {
@@ -136,7 +136,7 @@ public extension MRequest {
     .result
   }
   
-  func result<Serializer: DataResponseSerializerProtocol>(
+  public func result<Serializer: DataResponseSerializerProtocol>(
     using serializer: Serializer,
     automaticallyCancelling shouldAutomaticallyCancel: Bool = false
   ) async -> Result<Serializer.SerializedObject, AFError> {
@@ -148,53 +148,57 @@ public extension MRequest {
   }
   
   // MARK: - Decodeabe
-  func serializingDecodeable<Value: Decodable>(
+  public func serializingDecodeable<Value: Decodable>(
     _ type: Value.Type = Value.self
   ) async -> DataTask<Value> {
     dataRequest.serializingDecodable(Value.self)
   }
   
-  func resultDecodeable<Value: Decodable>(
+  public func resultDecodeable<Value: Decodable>(
     _ type: Value.Type = Value.self
   ) async -> Result<Value, AFError> {
     await serializingDecodeable(Value.self).result
   }
   
-  func decodeable<Value: Decodable>(
+  public func decodeable<Value: Decodable>(
     _ type: Value.Type = Value.self
   ) async throws -> Value {
     try await serializingDecodeable(Value.self).value
   }
   
   // MARK: - Data
-  var serializingData: DataTask<Data> {
+  public var serializingData: DataTask<Data> {
     get async {
       dataRequest.serializingData()
     }
   }
   
-  func resultData() async -> Result<Data, AFError> {
-    await serializingData.result
+  public var resultData: Result<Data, AFError> {
+    get async {
+      await serializingData.result
+    }
   }
   
-  var data: Data {
+  public var data: Data {
     get async throws {
       return try await serializingData.value
     }
   }
   
   // MARK: - String
-  var serializingString: DataTask<String> {
+  public var serializingString: DataTask<String> {
     get async {
       dataRequest.serializingString()
     }
   }
   
-  func resultString() async -> Result<String, AFError> {
-    await serializingString.result
+  public var resultString: Result<String, AFError> {
+    get async {
+      await serializingString.result
+    }
   }
   
-  var string: String {
+  public var string: String {
     get async throws {
       return try await serializingString.value
     }

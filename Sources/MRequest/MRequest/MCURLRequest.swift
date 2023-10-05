@@ -32,13 +32,13 @@ public struct MCURLRequest {
   public var toMRequest: MRequest {
     MRequest {
       if let urlString = cURLData.url {
-        RUrl(urlString: urlString)
+        RUrl(urlString)
       }
       if let httpMethod = cURLData.httpMethod {
         RMethod(HTTPMethod(rawValue: httpMethod))
       }
       if let headers = cURLData.headers {
-        RHeaders(headers: HTTPHeaders(headers))
+        RHeaders(HTTPHeaders(headers))
       }
       if let body = cURLData.postData {
         Rbody(body.data(using: .utf8))

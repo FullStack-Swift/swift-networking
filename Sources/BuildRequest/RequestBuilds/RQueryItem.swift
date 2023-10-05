@@ -21,6 +21,20 @@ public struct RQueryItem: RequestProtocol {
 }
 
 extension RQueryItem {
+  public init(_ key: () -> String, _ value: () -> String) {
+    self.init(key(), value: value())
+  }
+  
+  public init(_ key: String, _ value: () -> String) {
+    self.init(key, value: value())
+  }
+  
+  public init(_ key: () -> String, value: String) {
+    self.init(key(), value: value)
+  }
+}
+
+extension RQueryItem {
   var urlQueryItem: URLQueryItem {
     URLQueryItem(name: key, value: value)
   }

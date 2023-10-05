@@ -14,10 +14,10 @@ open class BaseAPIService {
 
 final public class AuthService: BaseAPIService {
   
-  func login(email: String,password: String) -> MRequest {
+  func login(email: String, password: String) -> MRequest {
     MRequest {
       RMethod(.post)
-      RUrl(urlString: urlString)
+      RUrl(urlString)
       //...
     }
   }
@@ -25,7 +25,7 @@ final public class AuthService: BaseAPIService {
   func login(email: password) -> MRequest {
     MRequest {
       RMethod(.post)
-      RUrl(urlString: urlString)
+      RUrl(urlString)
       //...
     }
   }

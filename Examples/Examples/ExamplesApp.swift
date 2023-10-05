@@ -10,7 +10,7 @@ struct ExamplesApp: App {
         .task {
           Task {
             let data = try await MRequest {
-              RUrl(urlString: "http://127.0.0.1:8080")
+              RUrl("http://127.0.0.1:8080")
                 .withPath("todos")
               Rbody(Todo(id: UUID(), text: "_text", isCompleted: false).toData())
               RMethod(.post)

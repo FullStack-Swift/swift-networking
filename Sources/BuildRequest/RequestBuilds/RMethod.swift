@@ -13,6 +13,12 @@ public struct RMethod: RequestProtocol {
 }
 
 extension RMethod {
+  public init(_ initial: () -> HTTPMethod) {
+    self.init(initial())
+  }
+}
+
+extension RMethod {
   public var description: String {
     [typeName: httpMethod?.rawValue ?? "nil"].description
   }
