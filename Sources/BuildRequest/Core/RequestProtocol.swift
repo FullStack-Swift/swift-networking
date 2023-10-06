@@ -101,14 +101,7 @@ extension RequestProtocol {
   
   public func executing(request: inout URLRequest, requests: [RequestProtocol] = []) {
     if requests.isEmpty { return }
-//    var items: [RequestProtocol] = []
-//    items.append(contentsOf: requests.filter({$0 is RUrl}))
-//    items.append(contentsOf: requests.filter({$0 is RPath}))
-//    items.append(contentsOf: requests.filter({!($0 is RUrl || $0 is REncoding || $0 is RPath)}))
-//    items.append(contentsOf: requests.filter({$0 is REncoding}))
-    
     let items: [RequestProtocol] = requests.cRequests()
-    /// build
     items.forEach {
       $0.build(request: &request)
     }

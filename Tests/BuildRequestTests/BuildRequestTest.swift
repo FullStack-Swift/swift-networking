@@ -211,4 +211,10 @@ final class BuildRequestTest: XCTestCase {
     let sequence = _SequenceMany(requests: requests)
     print(sequence)
   }
+  
+  func test_rurl() {
+    let url = RUrl("")
+      .withPath("ABC")
+      .with { $0.path }
+  }
 }

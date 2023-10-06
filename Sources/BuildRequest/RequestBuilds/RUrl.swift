@@ -1,7 +1,8 @@
 import Foundation
 
 public struct RUrl: RequestProtocol {
-  private let urlString: String
+  
+  public var urlString: String
   
   public init(_ urlString: String) {
     self.urlString = urlString
@@ -13,6 +14,18 @@ public struct RUrl: RequestProtocol {
 }
 
 extension RUrl {
+  
+  /// Init with computed closure
+  ///```swift
+  ///RUrl("path")
+  ///   .withPath("otherPaht")
+  ///   .with {
+  ///     $0.urlString += "other" // updating urlstring
+  ///     print($0.urlString)
+  ///   }
+  ///
+  ///```
+  /// - Parameter initial: A closure return a string url.
   public init(_ initial: () -> String) {
     self.init(initial())
   }

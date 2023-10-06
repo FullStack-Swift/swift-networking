@@ -20,6 +20,14 @@ public struct RQueryItems: RequestProtocol {
     } ?? []
   }
   
+  public init(_ queryItem: Data? = nil) {
+    self.init(queryItem?.toDictionary())
+  }
+  
+  public init(_ queryItem: String? = nil) {
+    self.init(queryItem?.toDictionary())
+  }
+  
   public init(_ params: [RQueryItem]) {
     self.children = params
   }
@@ -27,6 +35,18 @@ public struct RQueryItems: RequestProtocol {
 
 extension RQueryItems {
   public init(_ initial: () -> [String: Any]?) {
+    self.init(initial())
+  }
+  
+  public init(_ initial: () -> Data?) {
+    self.init(initial()?.toDictionary())
+  }
+  
+  public init(_ initial: () -> String?) {
+    self.init(initial()?.toDictionary())
+  }
+
+  public init(_ initial: () -> [RQueryItem]) {
     self.init(initial())
   }
 }
