@@ -4,14 +4,14 @@ import Foundation
 final public class MDownloadRequest {
   public var configuration: URLSessionConfiguration?
   public var urlRequest: URLRequest
-  public var parameter: RequestProtocol
+  public var parameter: any RequestProtocol
   internal var storeDownloadRequest: DownloadRequest!
   
   @discardableResult
   public init(
     urlRequest: URLRequest? = nil,
     configuration: URLSessionConfiguration? = nil,
-    @RequestBuilder builder: () -> RequestProtocol
+    @RequestBuilder builder: () -> any RequestProtocol
   ) {
     self.configuration = configuration
     self.urlRequest = urlRequest ?? URLRequest(url: URL(string: "https://")!)

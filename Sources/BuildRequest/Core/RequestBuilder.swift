@@ -14,14 +14,14 @@ public enum RequestBuilder {
   
   @inlinable
   public static func buildBlock(
-    _ component: Element
-  ) -> Element {
+    _ component: any Element
+  ) -> any Element {
     component
   }
   
   @inlinable
   public static func buildBlock(
-    _ components: Element...
+    _ components: any Element...
   ) -> _SequenceMany {
     _SequenceMany(requests: components)
   }
@@ -31,7 +31,7 @@ public enum RequestBuilder {
   
   @inlinable
   public static func buildArray(
-    _ components: [Element])
+    _ components: [any Element])
   -> _SequenceMany {
     _SequenceMany(requests: components)
   }
@@ -40,15 +40,15 @@ public enum RequestBuilder {
   
   @inlinable
   public static func buildEither(
-    first component: Element
-  ) -> Element {
+    first component: any Element
+  ) -> any Element {
     component
   }
   
   @inlinable
   public static func buildEither(
-    second component: Element
-  ) -> Element {
+    second component: any Element
+  ) -> any Element {
     component
   }
   
@@ -56,24 +56,24 @@ public enum RequestBuilder {
   
   @inlinable
   public static func buildExpression(
-    _ expression: Element
-  ) -> Element {
+    _ expression: any Element
+  ) -> any Element {
     expression
   }
   
     // MARK: - buildFinalResult
   
   public static func buildFinalResult(
-    _ component: Element
-  ) -> Element {
+    _ component: any Element
+  ) -> any Element {
     component
   }
   
     // MARK: - Build Limited Availability
   
   public static func buildLimitedAvailability(
-    _ component: Element
-  ) -> Element {
+    _ component: any Element
+  ) -> any Element {
     component
   }
   
@@ -81,22 +81,22 @@ public enum RequestBuilder {
   
   @inlinable
   public static func buildOptional(
-    _ component: Element?
-  ) -> Element {
+    _ component: (any Element)?
+  ) -> any Element {
     _SequenceMany(requests: [component].compactMap({$0}))
   }
   
     // MARK: - buildPartialBlock
   
   public static func buildPartialBlock(
-    first: Element
-  ) -> Element {
+    first: any Element
+  ) -> any Element {
     first
   }
   
   public static func buildPartialBlock(
-    accumulated: Element,
-    next: Element
+    accumulated: any Element,
+    next: any Element
   ) -> _SequenceMany {
     _SequenceMany(requests: [accumulated, next])
   }

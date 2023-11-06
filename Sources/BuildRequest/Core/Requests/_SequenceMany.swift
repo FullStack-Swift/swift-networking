@@ -2,14 +2,20 @@ import Foundation
 
 public struct _SequenceMany: RequestProtocol {
   
-  public var requests: [RequestProtocol]
+  public typealias Value = [any RequestProtocol]
   
-  public init(requests: [RequestProtocol] = []) {
+  public var requests: [any RequestProtocol]
+  
+  public init(requests: [any RequestProtocol] = []) {
     self.requests = requests
   }
   
   public func build(request: inout URLRequest) {
     executing(request: &request, requests: requests)
+  }
+  
+  public var value: Value {
+    requests
   }
 }
 

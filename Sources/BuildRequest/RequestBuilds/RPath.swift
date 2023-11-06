@@ -1,6 +1,7 @@
 import Foundation
 
 public struct RPath: RequestProtocol {
+  
   private let path: String?
   
   public init(_ path: String?) {
@@ -20,6 +21,10 @@ public struct RPath: RequestProtocol {
         request.url = URL(string: (urlString + "/" + path))
       }
     }
+  }
+  
+  public var value: String? {
+    path
   }
 }
 

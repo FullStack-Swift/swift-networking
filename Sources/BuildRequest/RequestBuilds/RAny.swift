@@ -12,6 +12,10 @@ public struct RAny: RequestProtocol {
     self.request.build(request: &request)
   }
   
+  public var value: any RequestProtocol {
+    request
+  }
+  
   public func `as`<R: RequestProtocol>(_ type: R.Type) -> R? {
     self.request as? R
   }

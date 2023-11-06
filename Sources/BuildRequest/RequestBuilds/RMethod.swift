@@ -1,6 +1,7 @@
 import Foundation
 
 public struct RMethod: RequestProtocol {
+  
   private let httpMethod: HTTPMethod?
   
   public init(_ httpMethod: HTTPMethod) {
@@ -9,6 +10,10 @@ public struct RMethod: RequestProtocol {
   
   public func build(request: inout URLRequest) {
     request.method = self.httpMethod
+  }
+  
+  public var value: HTTPMethod? {
+    httpMethod
   }
 }
 

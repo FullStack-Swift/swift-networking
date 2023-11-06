@@ -31,6 +31,10 @@ public struct RQueryItems: RequestProtocol {
   public init(_ params: [RQueryItem]) {
     self.children = params
   }
+  
+  public var value: [RQueryItem] {
+    children
+  }
 }
 
 extension RQueryItems {

@@ -1,7 +1,12 @@
 import Foundation
 
 public protocol RequestProtocol: CustomStringConvertible, CustomDebugStringConvertible {
+  
+  associatedtype Value
+  
   func build(request: inout URLRequest)
+  
+  var value: Value { get }
 }
 
 extension RequestProtocol {
@@ -99,9 +104,9 @@ extension RequestProtocol {
   
   public func build(request: URLRequest) { }
   
-  public func executing(request: inout URLRequest, requests: [RequestProtocol] = []) {
+  public func executing(request: inout URLRequest, requests: [any RequestProtocol] = []) {
     if requests.isEmpty { return }
-    let items: [RequestProtocol] = requests.cRequests()
+    let items: [any RequestProtocol] = requests.cRequests()
     items.forEach {
       $0.build(request: &request)
     }
@@ -166,7 +171,7 @@ extension Array where Element == any RequestProtocol {
     }
   }
   
-  func cRequests() -> [RequestProtocol] {
+  func cRequests() -> [any RequestProtocol] {
     rUrl + rPath + rMethod + rBody + rHeader + rQueryItem + rQueryItems + rOther + rEncoding
   }
   

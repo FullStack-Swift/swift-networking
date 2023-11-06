@@ -1,12 +1,12 @@
 import Foundation
 
 public struct RQueryItem: RequestProtocol {
-  private var key: String
-  private var value: String
+  private var _key: String
+  private var _value: String
   
   public init(_ key: String, value: String) {
-    self.key = key
-    self.value = value
+    self._key = key
+    self._value = value
   }
   
   public func build(request: inout URLRequest) {
@@ -17,6 +17,10 @@ public struct RQueryItem: RequestProtocol {
     queryItems += [urlQueryItem]
     components.queryItems = queryItems
     request.url = components.url
+  }
+  
+  public var value: (String, String) {
+    (_key, _value)
   }
 }
 
@@ -36,13 +40,13 @@ extension RQueryItem {
 
 extension RQueryItem {
   var urlQueryItem: URLQueryItem {
-    URLQueryItem(name: key, value: value)
+    URLQueryItem(name: _value, value: _value)
   }
 }
 
 extension RQueryItem {
   public var description: String {
-    [typeName: [key: value].toString() ?? "nil"].description
+    [typeName: [_key: _value].toString() ?? "nil"].description
   }
 }
 extension RQueryItem {

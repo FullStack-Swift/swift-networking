@@ -1,6 +1,7 @@
 import Foundation
 
 public struct RHeaders: RequestProtocol {
+  
   private let headers: HTTPHeaders
   
   public init(_ headers: HTTPHeaders) {
@@ -9,6 +10,10 @@ public struct RHeaders: RequestProtocol {
   
   public func build(request: inout URLRequest) {
     request.allHTTPHeaderFields = headers.dictionary
+  }
+  
+  public var value: [String: String] {
+    headers.dictionary
   }
 }
 

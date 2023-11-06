@@ -4,14 +4,14 @@ import Foundation
 final public class MUploadRequest {
   public var configuration: URLSessionConfiguration?
   public var urlRequest: URLRequest
-  public var parameter: RequestProtocol
+  public var parameter: any RequestProtocol
   internal var storeUploadRequest: UploadRequest!
   
   @discardableResult
   public init(
     urlRequest: URLRequest? = nil,
     configuration: URLSessionConfiguration? = nil,
-    @RequestBuilder builder: () -> RequestProtocol
+    @RequestBuilder builder: () -> any RequestProtocol
   ) {
     self.configuration = configuration
     self.urlRequest = urlRequest ?? URLRequest(url: URL(string: "https://")!)
@@ -24,11 +24,15 @@ final public class MUploadRequest {
 extension MUploadRequest {
   var uploadRequest: UploadRequest {
     if storeUploadRequest == nil {
+      var data = Data()
+      if let parameter = parameter as? _SequenceMany, let value = parameter.rBody?.value {
+        data = value
+      }
       if let configuration {
         let session = Session(configuration: configuration)
-        self.storeUploadRequest = session.upload(Data(), with: urlRequest)
+        self.storeUploadRequest = session.upload(data, with: urlRequest)
       } else {
-        self.storeUploadRequest = AF.upload(Data(), with: urlRequest)
+        self.storeUploadRequest = AF.upload(data, with: urlRequest)
       }
     }
     return storeUploadRequest

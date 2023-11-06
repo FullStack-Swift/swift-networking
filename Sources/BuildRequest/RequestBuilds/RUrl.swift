@@ -59,3 +59,9 @@ extension RUrl {
     description
   }
 }
+
+extension RUrl {
+  public var value: String {
+    urlString
+  }
+}

@@ -1,6 +1,7 @@
 import Foundation
 
 public struct Rbody: RequestProtocol {
+  
   private var data: Data?
   
   public init(_ data: Data?) {
@@ -9,6 +10,10 @@ public struct Rbody: RequestProtocol {
   
   public func build(request: inout URLRequest) {
     request.httpBody = data
+  }
+  
+  public var value: Data? {
+    data
   }
 }
 

@@ -2,6 +2,7 @@ import Foundation
 import Alamofire
 
 public struct REncoding: RequestProtocol {
+  
   private let encoding: any ParameterEncoding
   
   public init(_ encoding: ParameterEncoding = URLEncoding.default) {
@@ -14,6 +15,11 @@ public struct REncoding: RequestProtocol {
       request = newRequest
     }
   }
+  
+  public var value: ParameterEncoding {
+    encoding
+  }
+  
 }
 
 extension REncoding {
