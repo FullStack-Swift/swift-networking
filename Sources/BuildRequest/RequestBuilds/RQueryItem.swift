@@ -40,7 +40,7 @@ extension RQueryItem {
 
 extension RQueryItem {
   var urlQueryItem: URLQueryItem {
-    URLQueryItem(name: _value, value: _value)
+    URLQueryItem(name: _key, value: _value)
   }
 }
 
