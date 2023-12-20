@@ -106,10 +106,39 @@ extension RequestProtocol {
   
   public func executing(request: inout URLRequest, requests: [any RequestProtocol] = []) {
     if requests.isEmpty { return }
-    let items: [any RequestProtocol] = requests.cRequests()
+    
+    var items: [any RequestProtocol] = []
+    /// url
+    for item in requests {
+      if item is RUrl {
+        items.append(item)
+      }
+      if item is RPath {
+        items.append(item)
+      }
+    }
+    /// other
+    for item in requests {
+      if !(item is RUrl || item is REncoding || item is RPath) {
+        items.append(item)
+      }
+    }
+    /// encoding
+    for item in requests {
+      if item is REncoding {
+        items.append(item)
+      }
+    }
+    /// build
     items.forEach {
       $0.build(request: &request)
     }
+    // MARK: FIX IT.
+//    if requests.isEmpty { return }
+//    let items: [any RequestProtocol] = requests.cRequests()
+//    items.forEach {
+//      $0.build(request: &request)
+//    }
   }
   
   var typeName: String {
@@ -172,7 +201,7 @@ extension Array where Element == any RequestProtocol {
   }
   
   func cRequests() -> [any RequestProtocol] {
-    rUrl + rPath + rMethod + rBody + rHeader + rQueryItem + rQueryItems + rOther + rEncoding
+    rUrl + rPath + rBody + rMethod + rHeader + rQueryItem + rQueryItems + rOther + rEncoding
   }
   
   func requests<R: RequestProtocol>(_ type: R.Type) -> [Element] {
